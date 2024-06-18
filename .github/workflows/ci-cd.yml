@@ -34,7 +34,7 @@ jobs:
 
       - name: Build Angular project
         if: startsWith(github.ref, 'refs/heads/master')
-        run: npm run build --prod
+        run: yarn build
 
       - name: Deploy to Heroku
         if: startsWith(github.ref, 'refs/heads/master')
