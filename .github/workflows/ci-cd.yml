@@ -1,0 +1,46 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.11.1'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Run Husky Pre-commit Hooks
+        run: |
+          yarn prettier
+          yarn lint-style
+
+      - name: Run tests
+        run: yarn test --watch=false
+
+      - name: Print GitHub ref
+        run: echo "GitHub ref is ${{ github.ref }}"
+
+      - name: Build Angular project
+        if: startsWith(github.ref, 'refs/heads/master')
+        run: npm run build --prod
+
+      - name: Deploy to Heroku
+        if: startsWith(github.ref, 'refs/heads/master')
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+        run: |
+          git fetch --all --unshallow
+          git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master --force
