@@ -27,6 +27,16 @@ export function app(): express.Express {
     })
   );
 
+  server.get('/personal', (req, res) => {
+    console.log(1);
+    res.sendFile(browserDistFolder + '/index.html');
+  });
+
+  server.get('/personal/**', (req, res) => {
+    console.log(2);
+    res.sendFile(browserDistFolder + '/index.html');
+  });
+
   // All regular routes use the Angular engine
   server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
