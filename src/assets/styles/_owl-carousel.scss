@@ -1,0 +1,15 @@
+.owl-theme .owl-dots .owl-dot span {
+  background: var(--secondary-gray-color);
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: var(--primary-blue-color);
+}
+
+.owl-theme .owl-nav.disabled + .owl-dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+}
