@@ -1,13 +1,14 @@
 import { environment } from '../../../../environments/environment.development';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { TranslateModule } from '@ngx-translate/core';
+import { MapComponent } from 'ui/map/map.component';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CarouselModule, SvgIconComponent, TranslateModule],
+  imports: [CarouselModule, SvgIconComponent, TranslateModule, MapComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })
@@ -29,7 +30,7 @@ export class MainComponent {
       description: 'main-page.advantage-description-choosing',
     },
     {
-      id: 2,
+      id: '2',
       src: 'price-icon.png',
       title: 'main-page.advantage-item-price',
       description: 'main-page.advantage-description-price',
@@ -54,6 +55,34 @@ export class MainComponent {
     },
   ];
 
+  reviews = [
+    {
+      id: '1',
+      title: 'main-page.advantage-item-choosing',
+      description: 'main-page.advantage-description-choosing',
+    },
+    {
+      id: '2',
+      title: 'main-page.advantage-item-price',
+      description: 'main-page.advantage-description-price',
+    },
+    {
+      id: '3',
+      title: 'main-page.advantage-item-security',
+      description: 'main-page.advantage-description-security',
+    },
+    {
+      id: '4',
+      title: 'main-page.advantage-item-support',
+      description: 'main-page.advantage-description-support',
+    },
+    {
+      id: '5',
+      title: 'main-page.advantage-item-reviews',
+      description: 'main-page.advantage-description-reviews',
+    },
+  ];
+
   customOptions: OwlOptions = {
     loop: true,
     autoplay: true,
@@ -65,16 +94,35 @@ export class MainComponent {
     items: 3,
     navSpeed: 1500,
     responsive: {
-      0: {
-        items: 1,
-      },
-      400: {
-        items: 2,
-      },
       740: {
         items: 1,
       },
     },
     nav: false,
+  };
+
+  customOptionsReviews: OwlOptions = {
+    loop: true,
+    autoplay: true,
+    autoplayHoverPause: true,
+    autoplaySpeed: 3000,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    items: 3,
+    navSpeed: 1500,
+    responsive: {
+      480: {
+        items: 1,
+      },
+      740: {
+        items: 2,
+      },
+      1200: {
+        items: 3,
+      },
+    },
+    nav: false,
+    dots: false,
   };
 }

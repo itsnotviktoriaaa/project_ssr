@@ -126,6 +126,38 @@
   }
 }
 
+.reviews {
+  .container {
+    position: relative;
+
+    .reviews-h2 {
+      text-align: center;
+    }
+
+    .reviews-carousel {
+      margin-top: 50px;
+
+      .reviews-carousel-item {
+        border-right: 1px solid var(--secondary-blue-color);
+        padding: 0 40px;
+
+        .reviews-carousel-item-title {
+          color: var(--secondary-blue-color);
+        }
+      }
+
+      .reviews-carousel-arrows {
+        display: flex;
+        align-items: center;
+        column-gap: 40px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+    }
+  }
+}
+
 @media (width <= 992px) {
   .advantages {
     .advantages-items {

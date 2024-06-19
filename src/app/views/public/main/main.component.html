@@ -1,3 +1,9 @@
+<header
+  class="header"
+  style="width: 100%; height: 70px; background-color: var(--primary-gray-color)">
+  <div class="container"></div>
+</header>
+
 <main class="main">
   <div class="main-carousel">
     <owl-carousel-o [options]="customOptions" #owlCarouselMain>
@@ -64,3 +70,41 @@
     </div>
   </div>
 </section>
+
+<section class="reviews margin-top">
+  <div class="container">
+    <h2 class="reviews-h2">{{ 'main-page.reviews-title' | translate }}</h2>
+    <div class="reviews-carousel">
+      <owl-carousel-o [options]="customOptionsReviews" #owlCarouselReviews>
+        @for (review of reviews; track review) {
+          <ng-template carouselSlide [id]="review.id">
+            <div class="reviews-carousel-item">
+              <p class="reviews-carousel-item-title">"{{ review.title }}"</p>
+              <p>{{ review.description }}</p>
+            </div>
+          </ng-template>
+        }
+      </owl-carousel-o>
+      <div class="reviews-carousel-arrows">
+        <svg-icon
+          (click)="owlCarouselReviews.prev()"
+          [src]="imagesIconsPath + 'arrow-left.svg'"
+          [svgStyle]="{ cursor: 'pointer' }"></svg-icon>
+        <svg-icon
+          (click)="owlCarouselReviews.next()"
+          [src]="imagesIconsPath + 'arrow-left.svg'"
+          [svgStyle]="{ transform: 'rotate(180deg)', cursor: 'pointer' }"></svg-icon>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="map margin-top">
+  <app-map></app-map>
+</section>
+
+<footer
+  class="footer"
+  style="width: 100%; height: 400px; background-color: var(--primary-gray-color)">
+  <div class="container"></div>
+</footer>
