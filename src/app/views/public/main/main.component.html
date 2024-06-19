@@ -36,6 +36,31 @@
   </div>
 </main>
 
-<section class="about">
-  <div class="container"></div>
+<section class="about margin-top">
+  <div class="container">
+    <div class="about-info">
+      <h2 [innerHTML]="'main-page.about-title' | translate"></h2>
+      <p class="about-description">{{ 'main-page.about-us' | translate }}</p>
+    </div>
+    <div class="about-img" style="background-image: url({{ imagesPath + 'about-us.webp' }})"></div>
+  </div>
+</section>
+
+<section class="advantages margin-top">
+  <div class="container">
+    <h2>{{ 'main-page.advantages-title' | translate }}</h2>
+    <div class="advantages-items">
+      @for (advantage of advantages; track advantage; let even = $even) {
+        <div
+          class="advantages-item"
+          [class]="{ 'advantage-item-border': even, 'advantage-item-background': !even }">
+          <div
+            class="small-icon"
+            style="background-image: url({{ imagesIconsPath + advantage.src }})"></div>
+          <h3 class="advantage-item-title">{{ advantage.title | translate }}</h3>
+          <p class="advantage-item-description">{{ advantage.description | translate }}</p>
+        </div>
+      }
+    </div>
+  </div>
 </section>

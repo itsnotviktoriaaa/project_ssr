@@ -8,7 +8,19 @@
     "new-york": "New-York travelling",
     "main-title": "Book hotels, apartments and unique destinations around the world",
     "second-title": "Find the perfect destination for your holiday",
-    "about-us": "Welcome to our accommodation booking site! We help millions of travelers find and book accommodations around the world. Our mission is to make your vacation comfortable and unforgettable. With us you can find both cozy apartments in the city center and unique places to relax away from the hustle and bustle."
+    "about-title": "About <span class='about-booking'>Booking.com</span>",
+    "about-us": "Welcome to our accommodation booking site! We help millions of travelers find and book accommodations around the world. Our mission is to make your vacation comfortable and unforgettable. With us you can find both cozy apartments in the city center and unique places to relax away from the hustle and bustle.",
+    "advantages-title": "Our advantages",
+    "advantage-item-choosing": "Wide choice of accommodation",
+    "advantage-item-price": "Favorable prices",
+    "advantage-item-security": "Safety",
+    "advantage-item-support": "Support 24/7",
+    "advantage-item-reviews": "Reviews from real guests",
+    "advantage-description-choosing": "from budget hostels to luxury hotels",
+    "advantage-description-price": "we guarantee the best offers",
+    "advantage-description-security": "reliable reservation and data protection system",
+    "advantage-description-support": "our support team is always available to help you at any time",
+    "advantage-description-reviews": "read reviews and choose the best accommodation"
   },
   "buttons": {
     "find-housing": "Find housing",

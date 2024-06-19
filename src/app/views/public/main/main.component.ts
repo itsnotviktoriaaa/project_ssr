@@ -21,6 +21,39 @@ export class MainComponent {
     { id: '3', src: 'main-slider-3.webp', alt: 'main-page.new-york' },
   ];
 
+  advantages = [
+    {
+      id: 1,
+      src: 'choice-icon.png',
+      title: 'main-page.advantage-item-choosing',
+      description: 'main-page.advantage-description-choosing',
+    },
+    {
+      id: 2,
+      src: 'price-icon.png',
+      title: 'main-page.advantage-item-price',
+      description: 'main-page.advantage-description-price',
+    },
+    {
+      id: 3,
+      src: 'warning-icon.png',
+      title: 'main-page.advantage-item-security',
+      description: 'main-page.advantage-description-security',
+    },
+    {
+      id: 4,
+      src: 'support-icon.png',
+      title: 'main-page.advantage-item-support',
+      description: 'main-page.advantage-description-support',
+    },
+    {
+      id: 5,
+      src: 'reviews-icon.png',
+      title: 'main-page.advantage-item-reviews',
+      description: 'main-page.advantage-description-reviews',
+    },
+  ];
+
   customOptions: OwlOptions = {
     loop: true,
     autoplay: true,
