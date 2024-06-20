@@ -41,6 +41,24 @@
           display: flex;
           flex-direction: column;
           row-gap: 16px;
+
+          .auth-common-wrapper {
+            .auth-common-item {
+              position: relative;
+
+              input {
+                padding: 10px 40px 10px 10px;
+              }
+
+              .auth-common-eye {
+                position: absolute;
+                cursor: pointer;
+                top: 50%;
+                right: 12px;
+                transform: translateY(-32%);
+              }
+            }
+          }
         }
 
         .auth-form-button {

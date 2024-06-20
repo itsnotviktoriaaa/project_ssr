@@ -2,13 +2,15 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { environment } from '../../../../environments/environment.development';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ChoiceOfLoginEnum } from 'models/choice-of-login.enum';
+import { SvgIconComponent } from 'angular-svg-icon';
 import { HeaderComponent } from 'app/components';
 import { RouterLink } from '@angular/router';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HeaderComponent, ReactiveFormsModule, RouterLink],
+  imports: [HeaderComponent, ReactiveFormsModule, RouterLink, SvgIconComponent, NgStyle],
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './login.component.scss',
@@ -16,12 +18,11 @@ import { RouterLink } from '@angular/router';
 export class LoginComponent implements OnInit {
   imagePath = environment.imagesPath;
   imagesIconsPath = environment.imagesIconsPath;
-
-  constructor() {}
+  choiceOfLoginEnum = ChoiceOfLoginEnum;
+  choiceOfLogin: ChoiceOfLoginEnum = ChoiceOfLoginEnum.EMAIL;
 
   loginForm: FormGroup | null = null;
-  choiceOfLogin: ChoiceOfLoginEnum = ChoiceOfLoginEnum.EMAIL;
-  choiceOfLoginEnum = ChoiceOfLoginEnum;
+  isShowPassword = false;
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -51,5 +52,9 @@ export class LoginComponent implements OnInit {
     this.choiceOfLogin = ChoiceOfLoginEnum.PHONE;
     this.loginForm?.removeControl('email');
     this.loginForm?.addControl('phone', new FormControl('', Validators.required));
+  }
+
+  toggleShowPassword(): void {
+    this.isShowPassword = !this.isShowPassword;
   }
 }

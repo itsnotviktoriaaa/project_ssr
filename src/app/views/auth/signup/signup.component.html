@@ -1,1 +1,155 @@
-<p>signup works!</p>
+@if (signupForm) {
+  <section class="auth-common login">
+    <div class="container">
+      <div class="auth-common-left">
+        <h2 class="auth-common-title">Welcome back!</h2>
+        <h3 class="auth-common-description">
+          We are excited to have you back! Log in now and access your account.
+        </h3>
+
+        <div class="auth-form-container">
+          <form [formGroup]="signupForm" class="auth-common-form">
+            @if (choiceOfLogin === choiceOfLoginEnum.EMAIL) {
+              <div class="auth-common-wrapper">
+                <div class="auth-common-item">
+                  <input
+                    [ngStyle]="{
+                      'border-color':
+                        signupForm.get('email')?.invalid &&
+                        (signupForm.get('email')?.touched || signupForm.get('email')?.dirty)
+                          ? 'red'
+                          : '',
+                    }"
+                    formControlName="email"
+                    class="input auth-common-input"
+                    placeholder="Email"
+                    type="text"
+                    id="email" />
+                </div>
+                @if (
+                  signupForm &&
+                  signupForm.get('email')?.invalid &&
+                  (signupForm.get('email')?.touched || signupForm.get('email')?.dirty)
+                ) {
+                  <div class="auth-common-errors">
+                    @if (signupForm.get('email')?.errors?.['required']) {
+                      <span class="auth-common-error">Require fill email</span>
+                    }
+                    @if (signupForm.get('email')?.errors?.['email']) {
+                      <span class="auth-common-error">Email is not correct</span>
+                    }
+                  </div>
+                }
+              </div>
+            }
+            @if (choiceOfLogin === choiceOfLoginEnum.PHONE) {
+              <div class="auth-common-wrapper">
+                <div class="auth-common-item">
+                  <input
+                    [ngStyle]="{
+                      'border-color':
+                        signupForm.get('phone')?.invalid &&
+                        (signupForm.get('phone')?.touched || signupForm.get('phone')?.dirty)
+                          ? 'red'
+                          : '',
+                    }"
+                    formControlName="phone"
+                    class="input auth-common-input"
+                    placeholder="Phone"
+                    type="text"
+                    id="phone" />
+                </div>
+                @if (
+                  signupForm &&
+                  signupForm.get('phone')?.invalid &&
+                  (signupForm.get('phone')?.touched || signupForm.get('phone')?.dirty)
+                ) {
+                  <div class="auth-common-errors">
+                    @if (signupForm.get('phone')?.errors?.['required']) {
+                      <span class="auth-common-error">Require fill phone</span>
+                    }
+                  </div>
+                }
+              </div>
+            }
+            <div class="auth-common-wrapper">
+              <div class="auth-common-item">
+                <input
+                  [ngStyle]="{
+                    'border-color':
+                      signupForm.get('password')?.invalid &&
+                      (signupForm.get('password')?.touched || signupForm.get('password')?.dirty)
+                        ? 'red'
+                        : '',
+                  }"
+                  formControlName="password"
+                  class="input auth-common-input"
+                  placeholder="Password"
+                  [type]="isShowPassword ? 'password' : 'text'"
+                  id="password" />
+                <div class="auth-common-eye">
+                  @if (!isShowPassword) {
+                    <svg-icon
+                      (click)="toggleShowPassword()"
+                      [src]="imagesIconsPath + 'eye-close.svg'"></svg-icon>
+                  } @else {
+                    <svg-icon
+                      (click)="toggleShowPassword()"
+                      [src]="imagesIconsPath + 'eye-open.svg'"></svg-icon>
+                  }
+                </div>
+              </div>
+              @if (
+                signupForm &&
+                signupForm.get('password')?.invalid &&
+                (signupForm.get('password')?.touched || signupForm.get('password')?.dirty)
+              ) {
+                <div class="auth-common-errors">
+                  @if (signupForm.get('password')?.errors?.['required']) {
+                    <span class="auth-common-error">Require fill email</span>
+                  }
+                </div>
+              }
+            </div>
+          </form>
+          <button [disabled]="signupForm.invalid" class="button button-yellow auth-form-button">
+            Log In
+          </button>
+        </div>
+        <div class="line">
+          <hr />
+          <span>or</span>
+          <hr />
+        </div>
+        <div class="auth-common-methods">
+          <div class="auth-common-method">
+            <img [src]="imagesIconsPath + 'google-icon.png'" alt="Google" />
+          </div>
+          <div
+            (click)="chooseEmailForLogin()"
+            [class]="{
+              'auth-common-method': true,
+              'border-blue': choiceOfLogin === choiceOfLoginEnum.EMAIL,
+            }">
+            <img [src]="imagesIconsPath + 'email-icon.png'" alt="Email" />
+          </div>
+          <div
+            (click)="choosePhoneForLogin()"
+            [class]="{
+              'auth-common-method': true,
+              'border-blue': choiceOfLogin === choiceOfLoginEnum.PHONE,
+            }">
+            <img [src]="imagesIconsPath + 'phone-icon.png'" alt="Phone" />
+          </div>
+        </div>
+        <p class="auth-common-switch">
+          Already have an account?
+          <a [routerLink]="'/login'">Login</a>
+        </p>
+      </div>
+      <div class="auth-common-right">
+        <img [src]="imagePath + 'register-image.webp'" alt="Booking" />
+      </div>
+    </div>
+  </section>
+}

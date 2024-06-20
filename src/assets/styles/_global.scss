@@ -72,16 +72,27 @@ button {
 input {
   font-size: var(--small-font-size);
   outline: none;
-  border: 0;
   color: var(--text-white-color);
   font-family: Releway, sans-serif;
   font-weight: 500;
+  padding: 10px;
+  height: 42px;
+  border: 1px solid #b1bebd;
+  border-radius: 4px;
+  width: 100%;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+  background-color: transparent;
 }
 
 input::placeholder {
   font-family: Raleway, sans-serif;
   font-weight: 400;
   color: var(--text-light-color);
+}
+
+input:focus {
+  border-color: #007bff;
 }
 
 a {
@@ -150,22 +161,6 @@ a {
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
-}
-
-input[type='text'] {
-  padding: 10px;
-  height: 42px;
-  font-size: 16px;
-  border: 1px solid #b1bebd;
-  border-radius: 4px;
-  width: 100%;
-  transition: border-color 0.3s ease;
-  box-sizing: border-box;
-  background-color: transparent;
-}
-
-input[type='text']:focus {
-  border-color: #007bff;
 }
 
 .auth-common-error {

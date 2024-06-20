@@ -13,6 +13,13 @@
               <div class="auth-common-wrapper">
                 <div class="auth-common-item">
                   <input
+                    [ngStyle]="{
+                      'border-color':
+                        loginForm.get('email')?.invalid &&
+                        (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)
+                          ? 'red'
+                          : '',
+                    }"
                     formControlName="email"
                     class="input auth-common-input"
                     placeholder="Email"
@@ -39,6 +46,13 @@
               <div class="auth-common-wrapper">
                 <div class="auth-common-item">
                   <input
+                    [ngStyle]="{
+                      'border-color':
+                        loginForm.get('phone')?.invalid &&
+                        (loginForm.get('phone')?.touched || loginForm.get('phone')?.dirty)
+                          ? 'red'
+                          : '',
+                    }"
                     formControlName="phone"
                     class="input auth-common-input"
                     placeholder="Phone"
@@ -61,11 +75,29 @@
             <div class="auth-common-wrapper">
               <div class="auth-common-item">
                 <input
+                  [ngStyle]="{
+                    'border-color':
+                      loginForm.get('password')?.invalid &&
+                      (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)
+                        ? 'red'
+                        : '',
+                  }"
                   formControlName="password"
                   class="input auth-common-input"
                   placeholder="Password"
-                  type="text"
+                  [type]="isShowPassword ? 'password' : 'text'"
                   id="password" />
+                <div class="auth-common-eye">
+                  @if (!isShowPassword) {
+                    <svg-icon
+                      (click)="toggleShowPassword()"
+                      [src]="imagesIconsPath + 'eye-close.svg'"></svg-icon>
+                  } @else {
+                    <svg-icon
+                      (click)="toggleShowPassword()"
+                      [src]="imagesIconsPath + 'eye-open.svg'"></svg-icon>
+                  }
+                </div>
               </div>
               @if (
                 loginForm &&
