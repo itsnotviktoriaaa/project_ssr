@@ -19,6 +19,8 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideClientHydration(),
     provideHttpClient(withFetch()),
+    provideStore(),
+    provideEffects(),
     importProvidersFrom([
       RouterModule.forRoot(routes, {
         scrollPositionRestoration: 'enabled',
@@ -36,8 +38,6 @@ export const appConfig: ApplicationConfig = {
       BrowserModule,
       BrowserAnimationsModule,
     ]),
-    provideStore(),
-    provideEffects(),
     provideAngularSvgIcon(),
     provideRouterStore(),
   ],

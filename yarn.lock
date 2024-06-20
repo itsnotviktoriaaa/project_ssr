@@ -1921,10 +1921,10 @@
   resolved "https://registry.yarnpkg.com/@msgpackr-extract/msgpackr-extract-win32-x64/-/msgpackr-extract-win32-x64-3.0.3.tgz#0aa5502d547b57abfc4ac492de68e2006e417242"
   integrity sha512-x0fWaQtYp4E6sktbsdAqnehxDgEc/VwM7uLsRCYWaiGu0ykYdZPiS8zCWdnjHwyiumousxfBm4SO31eXqwEZhQ==
 
-"@ngrx/effects@^17.2.0":
-  version "17.2.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-17.2.0.tgz#37cec0b696cd7b14600f64e2ed0d9e47f5de10f1"
-  integrity sha512-tXDJNsuBtbvI/7+vYnkDKKpUvLbopw1U5G6LoPnKNrbTPsPcUGmCqF5Su/ZoRN3BhXjt2j+eoeVdpBkxdxMRgg==
+"@ngrx/effects@^18.0.0":
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-18.0.0.tgz#11e141c79b353984b5090a581ce8e1ae37e21f19"
+  integrity sha512-njDbltV4XnUO10VaIOoiXF+aCyhVnvg6NTLudG9uhK/+cuv3D10cTZ3pHv7ycjpc40Pp16Sz0SY+daj9HfvdKg==
   dependencies:
     "@ngrx/operators" "17.0.0-beta.0"
     tslib "^2.0.0"
@@ -1944,10 +1944,17 @@
   dependencies:
     tslib "^2.3.0"
 
-"@ngrx/router-store@^17.2.0":
-  version "17.2.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-17.2.0.tgz#ecee8aa884870ec3c56c09c661319d63d5c533b7"
-  integrity sha512-Vynfg2xsB57Oedf0Bb6mjC4MIeaF2OtAewsSnppGIM2b8pwL5W89r2+q2SGc2D6Mp3/pZF3HRI6NxhnHWJdYmg==
+"@ngrx/operators@^18.0.0":
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/operators/-/operators-18.0.0.tgz#8a9a00c5d714557b223a89be86c37e44580a68fe"
+  integrity sha512-JclwX/YCxgNWj5qLAcoSN74u0MkXOQ+y0+gVeSdiHDnFSmXApG52FG4nuqcNCjf2/H1Z8XxA/pgbtq04dEvS6w==
+  dependencies:
+    tslib "^2.3.0"
+
+"@ngrx/router-store@^18.0.0":
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-18.0.0.tgz#9075da4b634db3b89a4ad572db0c3b716ff8572d"
+  integrity sha512-Kiyh7qjs5PdNjYCip+BA0hx/tpjP/pDr0gUlz3X+9qTMC1vjzPmuzposZbTT2wZE+Z81TOoqdaZ5ZgRxAxhIMw==
   dependencies:
     tslib "^2.0.0"
 
@@ -1965,10 +1972,10 @@
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/store@^17.2.0":
-  version "17.2.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-17.2.0.tgz#d1a588cd8bae18a190bb71582f07e992406a76fa"
-  integrity sha512-7wKgZ59B/6yQSvvsU0DQXipDqpkAXv7LwcXLD5Ww7nvqN0fQoRPThMh4+Wv55DCJhE0bQc1NEMciLA47uRt7Wg==
+"@ngrx/store@^18.0.0":
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-18.0.0.tgz#32a3c589c7f42d981385dbbb16b838ce2511edfe"
+  integrity sha512-U/0cX7cQ7kkQrleNq5PQ1gD84lSI+ox2SIiDNAAxm8li7/S63QuRATFJIkMcVavR8yoa7gZ0WpyEKTlYGxEE2g==
   dependencies:
     tslib "^2.0.0"
 
