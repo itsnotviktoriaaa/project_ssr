@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   template: `
     <form [formGroup]="form" appPasswordRepeat>
       <input formControlName="password" />
-      <input formControlName="confirmPassword" />
+      <input formControlName="passwordRepeat" />
     </form>
   `,
   imports: [ReactiveFormsModule, PasswordRepeatDirective],
@@ -19,7 +19,7 @@ class TestComponent {
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       password: [''],
-      confirmPassword: [''],
+      passwordRepeat: [''],
     });
   }
 }
@@ -38,37 +38,37 @@ describe('PasswordRepeatDirective', () => {
     fixture.detectChanges();
   });
 
-  it('should return required error if both password and confirmPassword are empty', () => {
+  it('should return required error if both password and passwordRepeat are empty', () => {
     component.form.controls['password'].setValue('');
-    component.form.controls['confirmPassword'].setValue('');
+    component.form.controls['passwordRepeat'].setValue('');
 
     expect(component.form.controls['password'].errors).toEqual({ required: true });
-    expect(component.form.controls['confirmPassword'].errors).toEqual({ required: true });
+    expect(component.form.controls['passwordRepeat'].errors).toEqual({ required: true });
   });
 
-  it('should return passwordRepeat error if password and confirmPassword do not match', () => {
+  it('should return passwordRepeat error if password and passwordRepeat do not match', () => {
     component.form.controls['password'].setValue('password123');
-    component.form.controls['confirmPassword'].setValue('differentPassword');
+    component.form.controls['passwordRepeat'].setValue('differentPassword');
 
-    expect(component.form.controls['confirmPassword'].errors).toEqual({ passwordRepeat: true });
+    expect(component.form.controls['passwordRepeat'].errors).toEqual({ passwordRepeat: true });
   });
 
-  it('should not return passwordRepeat error if password and confirmPassword match', () => {
+  it('should not return passwordRepeat error if password and passwordRepeat match', () => {
     component.form.controls['password'].setValue('password123');
-    component.form.controls['confirmPassword'].setValue('password123');
+    component.form.controls['passwordRepeat'].setValue('password123');
 
-    expect(component.form.controls['confirmPassword'].errors).toBeNull();
+    expect(component.form.controls['passwordRepeat'].errors).toBeNull();
   });
 
-  it('should remove passwordRepeat error if confirmPassword is updated to match password', () => {
+  it('should remove passwordRepeat error if passwordRepeat is updated to match password', () => {
     component.form.controls['password'].setValue('password123');
-    component.form.controls['confirmPassword'].setValue('differentPassword');
+    component.form.controls['passwordRepeat'].setValue('differentPassword');
 
-    expect(component.form.controls['confirmPassword'].errors).toEqual({ passwordRepeat: true });
+    expect(component.form.controls['passwordRepeat'].errors).toEqual({ passwordRepeat: true });
 
-    component.form.controls['confirmPassword'].setValue('password123');
+    component.form.controls['passwordRepeat'].setValue('password123');
     fixture.detectChanges();
 
-    expect(component.form.controls['confirmPassword'].errors).toBeNull();
+    expect(component.form.controls['passwordRepeat'].errors).toBeNull();
   });
 });
