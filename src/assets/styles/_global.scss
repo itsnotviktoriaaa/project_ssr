@@ -73,16 +73,27 @@ input {
   font-size: var(--small-font-size);
   outline: none;
   border: 0;
+  color: var(--text-white-color);
+  font-family: Releway, sans-serif;
+  font-weight: 500;
+}
+
+input::placeholder {
+  font-family: Raleway, sans-serif;
+  font-weight: 400;
+  color: var(--text-light-color);
+}
+
+a {
+  color: var(--text-white-color);
 }
 
 .button {
   padding: 13px 40px;
   color: var(--text-white-color);
   text-transform: uppercase;
-}
-
-.button:disabled {
-  background: var(--disabled-color);
+  font-family: Relaway, sans-serif;
+  font-weight: 600;
 }
 
 .button-blue {
@@ -95,6 +106,18 @@ input {
 
 .button-blue:active {
   background: var(--primary-blue-active-color);
+}
+
+.button-yellow {
+  background: var(--secondary-yellow-color);
+}
+
+.button-yellow:hover {
+  background: var(--secondary-yellow-hover-color);
+}
+
+.button-yellow:active {
+  background: var(--secondary-yellow-active-color);
 }
 
 .button-transparent {
@@ -112,6 +135,10 @@ input {
   border: 1px solid var(--primary-blue-active-color);
 }
 
+.button:disabled {
+  background: var(--disabled-color);
+}
+
 .about-booking {
   font-family: Snell-Roundhand, sans-serif;
   font-weight: 400;
@@ -123,6 +150,44 @@ input {
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
+}
+
+input[type='text'] {
+  padding: 10px;
+  height: 42px;
+  font-size: 16px;
+  border: 1px solid #b1bebd;
+  border-radius: 4px;
+  width: 100%;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+input[type='text']:focus {
+  border-color: #007bff;
+}
+
+.auth-common-error {
+  color: var(--mistake-color);
+  margin-top: 7px;
+  font-family: Releway, sans-serif;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  column-gap: 7px;
+  color: var(--text-white-color);
+}
+
+.line hr {
+  display: inline-block;
+  width: 40%;
+  border: none;
+  border-top: 1px solid var(--text-white-color);
 }
 
 @media (width <= 1200px) {

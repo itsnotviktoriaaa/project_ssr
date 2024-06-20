@@ -1,15 +1,16 @@
 import { environment } from '../../../../environments/environment.development';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { TranslateModule } from '@ngx-translate/core';
 import { MapComponent } from 'ui/map/map.component';
 import { SvgIconComponent } from 'angular-svg-icon';
-import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-main',
   standalone: true,
   imports: [CarouselModule, SvgIconComponent, TranslateModule, MapComponent],
   templateUrl: './main.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './main.component.scss',
 })
 export class MainComponent {

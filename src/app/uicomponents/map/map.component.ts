@@ -5,6 +5,7 @@ import {
   ElementRef,
   OnDestroy,
   afterNextRender,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { Map, MapStyle, config, Marker } from '@maptiler/sdk';
 
@@ -14,6 +15,7 @@ import '@maptiler/sdk/dist/maptiler-sdk.css';
   selector: 'app-map',
   standalone: true,
   imports: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './map.component.html',
   styleUrl: './map.component.scss',
 })
