@@ -8,7 +8,11 @@
         </h3>
 
         <div class="auth-form-container">
-          <form [formGroup]="signupForm" class="auth-common-form">
+          <form
+            [formGroup]="signupForm"
+            appPasswordRepeat
+            appPasswordNotEmail
+            class="auth-common-form">
             @if (choiceOfLogin === choiceOfLoginEnum.EMAIL) {
               <div class="auth-common-wrapper">
                 <div class="auth-common-item">
@@ -77,6 +81,34 @@
                 <input
                   [ngStyle]="{
                     'border-color':
+                      signupForm.get('username')?.invalid &&
+                      (signupForm.get('username')?.touched || signupForm.get('username')?.dirty)
+                        ? 'red'
+                        : '',
+                  }"
+                  formControlName="username"
+                  class="input auth-common-input"
+                  placeholder="Username"
+                  type="text"
+                  id="username" />
+              </div>
+              @if (
+                signupForm &&
+                signupForm.get('username')?.invalid &&
+                (signupForm.get('username')?.touched || signupForm.get('username')?.dirty)
+              ) {
+                <div class="auth-common-errors">
+                  @if (signupForm.get('username')?.errors?.['required']) {
+                    <span class="auth-common-error">Require fill username</span>
+                  }
+                </div>
+              }
+            </div>
+            <div class="auth-common-wrapper">
+              <div class="auth-common-item">
+                <input
+                  [ngStyle]="{
+                    'border-color':
                       signupForm.get('password')?.invalid &&
                       (signupForm.get('password')?.touched || signupForm.get('password')?.dirty)
                         ? 'red'
@@ -90,11 +122,11 @@
                 <div class="auth-common-eye">
                   @if (!isShowPassword) {
                     <svg-icon
-                      (click)="toggleShowPassword()"
+                      (click)="toggleShowPassword('password')"
                       [src]="imagesIconsPath + 'eye-close.svg'"></svg-icon>
                   } @else {
                     <svg-icon
-                      (click)="toggleShowPassword()"
+                      (click)="toggleShowPassword('password')"
                       [src]="imagesIconsPath + 'eye-open.svg'"></svg-icon>
                   }
                 </div>
@@ -106,7 +138,61 @@
               ) {
                 <div class="auth-common-errors">
                   @if (signupForm.get('password')?.errors?.['required']) {
-                    <span class="auth-common-error">Require fill email</span>
+                    <span class="auth-common-error">Require fill password</span>
+                  }
+                  @if (signupForm.get('password')?.errors?.['pattern']) {
+                    <span class="auth-common-error">
+                      Password should have a letter, a big letter, number ans more than 7 symbols
+                    </span>
+                  }
+                  @if (signupForm.get('password')?.errors?.['passwordAsEmail']) {
+                    <span class="auth-common-error">Password shouldn't be like an your email</span>
+                  }
+                </div>
+              }
+            </div>
+            <div class="auth-common-wrapper">
+              <div class="auth-common-item">
+                <input
+                  [ngStyle]="{
+                    'border-color':
+                      signupForm.get('passwordRepeat')?.invalid &&
+                      (signupForm.get('passwordRepeat')?.touched ||
+                        signupForm.get('passwordRepeat')?.dirty)
+                        ? 'red'
+                        : '',
+                  }"
+                  formControlName="passwordRepeat"
+                  class="input auth-common-input"
+                  placeholder="Password Repeat"
+                  [type]="isShowPasswordRepeat ? 'password' : 'text'"
+                  id="passwordRepeat" />
+                <div class="auth-common-eye">
+                  @if (!isShowPasswordRepeat) {
+                    <svg-icon
+                      (click)="toggleShowPassword('passwordRepeat')"
+                      [src]="imagesIconsPath + 'eye-close.svg'"></svg-icon>
+                  } @else {
+                    <svg-icon
+                      (click)="toggleShowPassword('passwordRepeat')"
+                      [src]="imagesIconsPath + 'eye-open.svg'"></svg-icon>
+                  }
+                </div>
+              </div>
+              @if (
+                signupForm &&
+                signupForm.get('passwordRepeat')?.invalid &&
+                (signupForm.get('passwordRepeat')?.touched ||
+                  signupForm.get('passwordRepeat')?.dirty)
+              ) {
+                <div class="auth-common-errors">
+                  @if (signupForm.get('passwordRepeat')?.errors?.['required']) {
+                    <span class="auth-common-error">Require fill password repeat</span>
+                  }
+                  @if (signupForm.get('passwordRepeat')?.errors?.['passwordRepeat']) {
+                    <span class="auth-common-error">
+                      Password should be the same like a previous field
+                    </span>
                   }
                 </div>
               }
