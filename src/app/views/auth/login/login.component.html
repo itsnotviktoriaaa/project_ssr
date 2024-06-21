@@ -2,9 +2,9 @@
   <section class="auth-common login">
     <div class="container">
       <div class="auth-common-left">
-        <h2 class="auth-common-title">Welcome back!</h2>
+        <h2 class="auth-common-title">{{ 'auth.welcome-back' | translate }}</h2>
         <h3 class="auth-common-description">
-          We are excited to have you back! Log in now and access your account.
+          {{ 'auth.login-description' | translate }}
         </h3>
 
         <div class="auth-form-container">
@@ -32,17 +32,21 @@
                   (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)
                 ) {
                   <div class="auth-common-errors">
-                    @if (loginForm.get('email')?.errors?.['required']) {
-                      <span class="auth-common-error">Require fill email</span>
+                    @if (loginForm!.get('email')?.errors?.['required']) {
+                      <span class="auth-common-error">
+                        {{ 'auth.error-email-required' | translate }}
+                      </span>
                     }
-                    @if (loginForm.get('email')?.errors?.['email']) {
-                      <span class="auth-common-error">Email is not correct</span>
+                    @if (loginForm!.get('email')?.errors?.['email']) {
+                      <span class="auth-common-error">
+                        {{ 'auth.error-email-email' | translate }}
+                      </span>
                     }
                   </div>
                 }
               </div>
             }
-            @if (choiceOfLogin === choiceOfLoginEnum.PHONE) {
+            @if (choiceOfLogin === choiceOfLoginEnum.PHONE && showPhoneControl()) {
               <div class="auth-common-wrapper">
                 <div class="auth-common-item">
                   <input
@@ -65,8 +69,10 @@
                   (loginForm.get('phone')?.touched || loginForm.get('phone')?.dirty)
                 ) {
                   <div class="auth-common-errors">
-                    @if (loginForm.get('phone')?.errors?.['required']) {
-                      <span class="auth-common-error">Require fill phone</span>
+                    @if (loginForm!.get('phone')?.errors?.['required']) {
+                      <span class="auth-common-error">
+                        {{ 'auth.error-phone-required' | translate }}
+                      </span>
                     }
                   </div>
                 }
@@ -95,72 +101,92 @@
                   (loginForm.get('code')?.touched || loginForm.get('code')?.dirty)
                 ) {
                   <div class="auth-common-errors">
-                    @if (loginForm.get('code')?.errors?.['required']) {
-                      <span class="auth-common-error">Require fill code</span>
+                    @if (loginForm!.get('code')?.errors?.['required']) {
+                      <span class="auth-common-error">
+                        {{ 'auth.error-code-required' | translate }}
+                      </span>
                     }
                   </div>
                 }
               </div>
             }
-            <div class="auth-common-wrapper">
-              <div class="auth-common-item">
-                <input
-                  [ngStyle]="{
-                    'border-color':
-                      loginForm.get('password')?.invalid &&
-                      (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)
-                        ? 'red'
-                        : '',
-                  }"
-                  formControlName="password"
-                  class="input auth-common-input"
-                  placeholder="Password"
-                  [type]="isShowPassword ? 'password' : 'text'"
-                  id="password" />
-                <div class="auth-common-eye">
-                  @if (!isShowPassword) {
-                    <svg-icon
-                      (click)="toggleShowPassword()"
-                      [src]="imagesIconsPath + 'eye-close.svg'"></svg-icon>
-                  } @else {
-                    <svg-icon
-                      (click)="toggleShowPassword()"
-                      [src]="imagesIconsPath + 'eye-open.svg'"></svg-icon>
-                  }
+            @if (choiceOfLogin === choiceOfLoginEnum.EMAIL) {
+              <div class="auth-common-wrapper">
+                <div class="auth-common-item">
+                  <input
+                    [ngStyle]="{
+                      'border-color':
+                        loginForm.get('password')?.invalid &&
+                        (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)
+                          ? 'red'
+                          : '',
+                    }"
+                    formControlName="password"
+                    class="input auth-common-input"
+                    placeholder="Password"
+                    [type]="isShowPassword ? 'password' : 'text'"
+                    id="password" />
+                  <div class="auth-common-eye">
+                    @if (!isShowPassword) {
+                      <svg-icon
+                        (click)="toggleShowPassword()"
+                        [src]="imagesIconsPath + 'eye-close.svg'"></svg-icon>
+                    } @else {
+                      <svg-icon
+                        (click)="toggleShowPassword()"
+                        [src]="imagesIconsPath + 'eye-open.svg'"></svg-icon>
+                    }
+                  </div>
                 </div>
+                @if (
+                  loginForm &&
+                  loginForm.get('password')?.invalid &&
+                  (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)
+                ) {
+                  <div class="auth-common-errors">
+                    @if (loginForm!.get('password')?.errors?.['required']) {
+                      <span class="auth-common-error">
+                        {{ 'auth.error-password-required' | translate }}
+                      </span>
+                    }
+                  </div>
+                }
               </div>
-              @if (
-                loginForm &&
-                loginForm.get('password')?.invalid &&
-                (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)
-              ) {
-                <div class="auth-common-errors">
-                  @if (loginForm.get('password')?.errors?.['required']) {
-                    <span class="auth-common-error">Require fill password</span>
-                  }
-                </div>
-              }
-            </div>
+            }
           </form>
           <div id="recaptcha-container"></div>
-          <button
-            (click)="login()"
-            [disabled]="loginForm.invalid"
-            class="button button-yellow auth-form-button">
-            Log In
-          </button>
-          <button (click)="sendOTP()" class="button button-yellow auth-form-button">SendOTP</button>
-          <button (click)="verifyOTP()" class="button button-yellow auth-form-button">
-            VerifyOTP
-          </button>
+          @if (choiceOfLogin === choiceOfLoginEnum.EMAIL) {
+            <button
+              (click)="login()"
+              [disabled]="loginForm.invalid"
+              class="button button-yellow auth-form-button">
+              {{ 'auth.log-in-button' | translate }}
+            </button>
+          } @else if (choiceOfLogin === choiceOfLoginEnum.PHONE) {
+            @if (showPhoneControl()) {
+              <button
+                [disabled]="!loginForm.get('phone')?.valid"
+                (click)="sendOTP()"
+                class="button button-yellow auth-form-button">
+                {{ 'auth.send-otp' | translate }}
+              </button>
+            } @else {
+              <button
+                [disabled]="!loginForm.get('code')?.valid"
+                (click)="verifyOTP()"
+                class="button button-yellow auth-form-button">
+                {{ 'auth.verify-otp' | translate }}
+              </button>
+            }
+          }
         </div>
         <div class="line">
           <hr />
-          <span>or</span>
+          <span>{{ 'auth.or-text' | translate }}</span>
           <hr />
         </div>
         <div class="auth-common-methods">
-          <div class="auth-common-method">
+          <div class="auth-common-method" (click)="loginViaGoogle()">
             <img [src]="imagesIconsPath + 'google-icon.png'" alt="Google" />
           </div>
           <div
@@ -181,8 +207,8 @@
           </div>
         </div>
         <p class="auth-common-switch">
-          Don't have an account yet?
-          <a [routerLink]="'/signup'">Register</a>
+          {{ 'auth.dont-account' | translate }}
+          <a [routerLink]="'/signup'">{{ 'auth.login-button' | translate }}</a>
         </p>
       </div>
       <div class="auth-common-right">

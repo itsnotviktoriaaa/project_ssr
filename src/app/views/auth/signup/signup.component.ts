@@ -13,10 +13,11 @@ import {
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { catchError, EMPTY, Observable, takeUntil, tap } from 'rxjs';
+import { AuthCheckService, AuthService, Constants } from 'app/core';
 import { ChoiceOfLoginEnum } from 'models/choice-of-login.enum';
+import { TranslateModule } from '@ngx-translate/core';
 import { Router, RouterLink } from '@angular/router';
 import { SvgIconComponent } from 'angular-svg-icon';
-import { AuthService, Constants } from 'app/core';
 import { NgStyle } from '@angular/common';
 
 @Component({
@@ -30,6 +31,7 @@ import { NgStyle } from '@angular/common';
     RouterLink,
     PasswordRepeatDirective,
     PasswordNotEmailDirective,
+    TranslateModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [DestroyDirective],
@@ -50,7 +52,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private authCheckService: AuthCheckService
   ) {}
 
   ngOnInit(): void {
@@ -65,27 +68,9 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  chooseEmailForLogin(): void {
-    if (this.choiceOfLogin === ChoiceOfLoginEnum.EMAIL) {
-      return;
-    }
-
-    this.choiceOfLogin = ChoiceOfLoginEnum.EMAIL;
-    this.signupForm?.removeControl('phone');
-    this.signupForm?.addControl(
-      'email',
-      new FormControl('', [Validators.required, Validators.email])
-    );
-  }
-
   choosePhoneForLogin(): void {
-    if (this.choiceOfLogin === ChoiceOfLoginEnum.PHONE) {
-      return;
-    }
-
-    this.choiceOfLogin = ChoiceOfLoginEnum.PHONE;
-    this.signupForm?.removeControl('email');
-    this.signupForm?.addControl('phone', new FormControl('', Validators.required));
+    this.authCheckService.setAuthViaPhone(true);
+    this.router.navigate(['personal']).then(() => {});
   }
 
   toggleShowPassword(showValue: 'password' | 'passwordRepeat'): void {
@@ -127,5 +112,32 @@ export class SignupComponent implements OnInit {
         )
         .subscribe();
     }
+  }
+
+  loginViaGoogle(): void {
+    this.authService
+      .loginViaGoogle()
+      .pipe(
+        tap(user => {
+          this.handleGoogleLogin(user);
+        }),
+        takeUntil(this.destroy$),
+        catchError(() => {
+          this.handleError();
+          return EMPTY;
+        })
+      )
+      .subscribe();
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private handleGoogleLogin(user: any): void {
+    console.log(user);
+    console.log('okey from /google');
+    this.router.navigate(['/personal']).then(() => {});
+  }
+
+  private handleError(): void {
+    console.log('sth went wrong/google');
   }
 }

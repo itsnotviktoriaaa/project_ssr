@@ -1,22 +1,38 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../../../environments/environment.development';
+import { AuthCheckService, AuthService, DestroyDirective } from 'app/core';
 import { ChoiceOfLoginEnum } from 'models/choice-of-login.enum';
+import { catchError, EMPTY, from, takeUntil, tap } from 'rxjs';
 import { WindowService } from 'core/services/window.service';
 import { ConfirmationResult } from '@angular/fire/auth';
+import { TranslateModule } from '@ngx-translate/core';
 import { Router, RouterLink } from '@angular/router';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { HeaderComponent } from 'app/components';
-import { catchError, EMPTY, tap } from 'rxjs';
 import { NgStyle } from '@angular/common';
-import { AuthService } from 'app/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HeaderComponent, ReactiveFormsModule, RouterLink, SvgIconComponent, NgStyle],
+  imports: [
+    HeaderComponent,
+    ReactiveFormsModule,
+    RouterLink,
+    SvgIconComponent,
+    NgStyle,
+    TranslateModule,
+  ],
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [DestroyDirective],
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
@@ -27,14 +43,18 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup | null = null;
   isShowPassword = false;
+  showPhoneControl = signal(true);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   windowRef: any;
 
+  private readonly destroy$ = inject(DestroyDirective).destroy$;
+
   constructor(
     private authService: AuthService,
     private router: Router,
-    private windowService: WindowService
+    private windowService: WindowService,
+    private authCheckService: AuthCheckService
   ) {
     afterNextRender((): void => {
       this.windowRef = this.windowService.windowRef;
@@ -49,6 +69,18 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
     });
+
+    this.authCheckService
+      .getAuthViaPhone()
+      .pipe(
+        tap((param: boolean) => {
+          if (param) {
+            this.choosePhoneForLogin();
+          }
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
   sendOTP(): void {
@@ -58,7 +90,10 @@ export class LoginComponent implements OnInit {
         tap((confirmationResult: ConfirmationResult) => {
           this.windowRef.confirmationResult = confirmationResult;
           console.log(confirmationResult);
+          this.loginForm?.removeControl('phone');
+          this.showPhoneControl.set(false);
         }),
+        takeUntil(this.destroy$),
         catchError(err => {
           console.log(err);
           return EMPTY;
@@ -68,15 +103,20 @@ export class LoginComponent implements OnInit {
   }
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  verifyOTP() {
-    this.windowRef.confirmationResult
-      .confirm(this.loginForm?.get('code')?.value)
-      .then((userCredentials: any) => {
-        console.log(userCredentials);
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
+  verifyOTP(): void {
+    from(this.windowRef.confirmationResult.confirm(this.loginForm?.get('code')?.value))
+      .pipe(
+        tap((userCredentials: any) => {
+          this.router.navigate(['/personal']).then(() => {});
+          console.log(userCredentials);
+        }),
+        takeUntil(this.destroy$),
+        catchError(err => {
+          console.log('went wrong', err);
+          return EMPTY;
+        })
+      )
+      .subscribe();
   }
   /* eslint-enable @typescript-eslint/no-explicit-any */
 
@@ -91,6 +131,7 @@ export class LoginComponent implements OnInit {
       'email',
       new FormControl('', [Validators.required, Validators.email])
     );
+    this.loginForm?.addControl('password', new FormControl('', [Validators.required]));
   }
 
   choosePhoneForLogin(): void {
@@ -130,5 +171,32 @@ export class LoginComponent implements OnInit {
         )
         .subscribe();
     }
+  }
+
+  loginViaGoogle(): void {
+    this.authService
+      .loginViaGoogle()
+      .pipe(
+        tap(user => {
+          this.handleGoogleLogin(user);
+        }),
+        takeUntil(this.destroy$),
+        catchError(() => {
+          this.handleError();
+          return EMPTY;
+        })
+      )
+      .subscribe();
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private handleGoogleLogin(user: any): void {
+    console.log(user);
+    console.log('okey from /google');
+    this.router.navigate(['/personal']).then(() => {});
+  }
+
+  private handleError(): void {
+    console.log('sth went wrong/google');
   }
 }

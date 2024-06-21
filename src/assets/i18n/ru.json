@@ -26,5 +26,29 @@
   "buttons": {
     "find-housing": "Найти жилье",
     "popular-destinations": "Популярные направления"
+  },
+  "auth": {
+    "auth-title": "Регистрация",
+    "auth-description": "Готовы стать частью эксклюзивного клуба? Заполните данные ниже, и пусть начнется путешествие!",
+    "error-email-required": "Требуется указать email",
+    "error-email-email": "Email указан неверно",
+    "error-phone-required": "Требуется указать телефон",
+    "error-username-required": "Требуется указать имя пользователя",
+    "error-password-required": "Требуется указать пароль",
+    "error-password-pattern": "Пароль должен содержать букву, заглавную букву, цифру и быть длиннее 7 символов",
+    "error-password-patternLikeEmail": "Пароль не должен совпадать с вашим email",
+    "error-passwordRepeat-required": "Требуется повторно указать пароль",
+    "error-passwordRepeat-pattern": "Пароли должны совпадать",
+    "log-in-button": "Войти",
+    "or-text": "или",
+    "already-have": "Уже есть аккаунт?",
+    "register-button": "Зарегистрироваться",
+    "welcome-back": "Добро пожаловать обратно!",
+    "login-description": "Мы рады видеть вас снова! Войдите сейчас и получите доступ к вашему аккаунту.",
+    "error-code-required": "Требуется указать код",
+    "send-otp": "Отправить OTP",
+    "verify-otp": "Подтвердить OTP",
+    "dont-account": "Еще нет аккаунта?",
+    "login-button": "Войти"
   }
 }

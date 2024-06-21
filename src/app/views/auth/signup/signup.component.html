@@ -2,9 +2,9 @@
   <section class="auth-common login">
     <div class="container">
       <div class="auth-common-left">
-        <h2 class="auth-common-title">Welcome back!</h2>
+        <h2 class="auth-common-title">{{ 'auth.auth-title' | translate }}</h2>
         <h3 class="auth-common-description">
-          We are excited to have you back! Log in now and access your account.
+          {{ 'auth.auth-description' | translate }}
         </h3>
 
         <div class="auth-form-container">
@@ -36,11 +36,15 @@
                   (signupForm.get('email')?.touched || signupForm.get('email')?.dirty)
                 ) {
                   <div class="auth-common-errors">
-                    @if (signupForm.get('email')?.errors?.['required']) {
-                      <span class="auth-common-error">Require fill email</span>
+                    @if (signupForm!.get('email')?.errors?.['required']) {
+                      <span class="auth-common-error">
+                        {{ 'auth.error-email-required' | translate }}
+                      </span>
                     }
-                    @if (signupForm.get('email')?.errors?.['email']) {
-                      <span class="auth-common-error">Email is not correct</span>
+                    @if (signupForm!.get('email')?.errors?.['email']) {
+                      <span class="auth-common-error">
+                        {{ 'auth.error-email-email' | translate }}
+                      </span>
                     }
                   </div>
                 }
@@ -69,8 +73,10 @@
                   (signupForm.get('phone')?.touched || signupForm.get('phone')?.dirty)
                 ) {
                   <div class="auth-common-errors">
-                    @if (signupForm.get('phone')?.errors?.['required']) {
-                      <span class="auth-common-error">Require fill phone</span>
+                    @if (signupForm!.get('phone')?.errors?.['required']) {
+                      <span class="auth-common-error">
+                        {{ 'auth.error-phone-required' | translate }}
+                      </span>
                     }
                   </div>
                 }
@@ -98,8 +104,10 @@
                 (signupForm.get('username')?.touched || signupForm.get('username')?.dirty)
               ) {
                 <div class="auth-common-errors">
-                  @if (signupForm.get('username')?.errors?.['required']) {
-                    <span class="auth-common-error">Require fill username</span>
+                  @if (signupForm!.get('username')?.errors?.['required']) {
+                    <span class="auth-common-error">
+                      {{ 'auth.error-username-required' | translate }}
+                    </span>
                   }
                 </div>
               }
@@ -109,8 +117,8 @@
                 <input
                   [ngStyle]="{
                     'border-color':
-                      signupForm.get('password')?.invalid &&
-                      (signupForm.get('password')?.touched || signupForm.get('password')?.dirty)
+                      signupForm!.get('password')?.invalid &&
+                      (signupForm!.get('password')?.touched || signupForm!.get('password')?.dirty)
                         ? 'red'
                         : '',
                   }"
@@ -137,16 +145,18 @@
                 (signupForm.get('password')?.touched || signupForm.get('password')?.dirty)
               ) {
                 <div class="auth-common-errors">
-                  @if (signupForm.get('password')?.errors?.['required']) {
-                    <span class="auth-common-error">Require fill password</span>
-                  }
-                  @if (signupForm.get('password')?.errors?.['pattern']) {
+                  @if (signupForm!.get('password')?.errors?.['required']) {
                     <span class="auth-common-error">
-                      Password should have a letter, a big letter, number ans more than 7 symbols
+                      {{ 'auth.error-password-required' | translate }}
                     </span>
                   }
-                  @if (signupForm.get('password')?.errors?.['passwordAsEmail']) {
-                    <span class="auth-common-error">Password shouldn't be like an your email</span>
+                  @if (signupForm!.get('password')?.errors?.['pattern']) {
+                    <span class="auth-common-error">
+                      {{ 'auth.error-password-pattern' | translate }}
+                    </span>
+                  }
+                  @if (signupForm!.get('password')?.errors?.['passwordAsEmail']) {
+                    <span class="auth-common-error">{{ 'auth.patternLikeEmail' | translate }}</span>
                   }
                 </div>
               }
@@ -156,9 +166,9 @@
                 <input
                   [ngStyle]="{
                     'border-color':
-                      signupForm.get('passwordRepeat')?.invalid &&
-                      (signupForm.get('passwordRepeat')?.touched ||
-                        signupForm.get('passwordRepeat')?.dirty)
+                      signupForm!.get('passwordRepeat')?.invalid &&
+                      (signupForm!.get('passwordRepeat')?.touched ||
+                        signupForm!.get('passwordRepeat')?.dirty)
                         ? 'red'
                         : '',
                   }"
@@ -186,12 +196,14 @@
                   signupForm.get('passwordRepeat')?.dirty)
               ) {
                 <div class="auth-common-errors">
-                  @if (signupForm.get('passwordRepeat')?.errors?.['required']) {
-                    <span class="auth-common-error">Require fill password repeat</span>
-                  }
-                  @if (signupForm.get('passwordRepeat')?.errors?.['passwordRepeat']) {
+                  @if (signupForm!.get('passwordRepeat')?.errors?.['required']) {
                     <span class="auth-common-error">
-                      Password should be the same like a previous field
+                      {{ 'auth.error-passwordRepeat-required' | translate }}
+                    </span>
+                  }
+                  @if (signupForm!.get('passwordRepeat')?.errors?.['passwordRepeat']) {
+                    <span class="auth-common-error">
+                      {{ 'auth.error-passwordRepeat-pattern' | translate }}
                     </span>
                   }
                 </div>
@@ -200,22 +212,21 @@
           </form>
           <button
             (click)="register()"
-            [disabled]="signupForm.invalid"
+            [disabled]="signupForm!.invalid"
             class="button button-yellow auth-form-button">
-            Log In
+            {{ 'auth.log-in-button' | translate }}
           </button>
         </div>
         <div class="line">
           <hr />
-          <span>or</span>
+          <span>{{ 'auth.or-text' | translate }}</span>
           <hr />
         </div>
         <div class="auth-common-methods">
-          <div class="auth-common-method">
+          <div (click)="loginViaGoogle()" class="auth-common-method">
             <img [src]="imagesIconsPath + 'google-icon.png'" alt="Google" />
           </div>
           <div
-            (click)="chooseEmailForLogin()"
             [class]="{
               'auth-common-method': true,
               'border-blue': choiceOfLogin === choiceOfLoginEnum.EMAIL,
@@ -232,8 +243,8 @@
           </div>
         </div>
         <p class="auth-common-switch">
-          Already have an account?
-          <a [routerLink]="'/login'">Login</a>
+          {{ 'auth.already-have' | translate }}
+          <a [routerLink]="'/login'">{{ 'auth.register-button' | translate }}</a>
         </p>
       </div>
       <div class="auth-common-right">

@@ -26,5 +26,29 @@
   "buttons": {
     "find-housing": "Find housing",
     "popular-destinations": "Popular destinations"
+  },
+  "auth": {
+    "auth-title": "Register",
+    "auth-description": "Ready to become part of th exclusive club? Fill in the details below, and let the journey begin!",
+    "error-email-required": "Require fill email",
+    "error-email-email": "Email is not correct",
+    "error-phone-required": "Require fill phone",
+    "error-username-required": "Require fill username",
+    "error-password-required": "Require fill password",
+    "error-password-pattern": "Password should have a letter, a big letter, number ans more than 7 symbols",
+    "error-password-patternLikeEmail": "Password shouldn't be like an your email",
+    "error-passwordRepeat-required": "Require fill password repeat",
+    "error-passwordRepeat-pattern": "Password should be the same like a previous field",
+    "log-in-button": "Log In",
+    "or-text": "or",
+    "already-have": "Already have an account?",
+    "register-button": "Register",
+    "welcome-back": "Welcome back!",
+    "login-description": "We are excited to have you back! Log in now and access your account.",
+    "error-code-required": "Require fill code",
+    "send-otp": "Send OTP",
+    "verify-otp": "Verify OTP",
+    "dont-account": "Don't have an account yet?",
+    "login-button": "Login"
   }
 }
