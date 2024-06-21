@@ -198,7 +198,10 @@
               }
             </div>
           </form>
-          <button [disabled]="signupForm.invalid" class="button button-yellow auth-form-button">
+          <button
+            (click)="register()"
+            [disabled]="signupForm.invalid"
+            class="button button-yellow auth-form-button">
             Log In
           </button>
         </div>

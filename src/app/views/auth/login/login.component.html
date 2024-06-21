@@ -72,6 +72,36 @@
                 }
               </div>
             }
+            @if (choiceOfLogin === choiceOfLoginEnum.PHONE) {
+              <div class="auth-common-wrapper">
+                <div class="auth-common-item">
+                  <input
+                    [ngStyle]="{
+                      'border-color':
+                        loginForm.get('code')?.invalid &&
+                        (loginForm.get('code')?.touched || loginForm.get('code')?.dirty)
+                          ? 'red'
+                          : '',
+                    }"
+                    formControlName="code"
+                    class="input auth-common-input"
+                    placeholder="Code"
+                    type="text"
+                    id="code" />
+                </div>
+                @if (
+                  loginForm &&
+                  loginForm.get('code')?.invalid &&
+                  (loginForm.get('code')?.touched || loginForm.get('code')?.dirty)
+                ) {
+                  <div class="auth-common-errors">
+                    @if (loginForm.get('code')?.errors?.['required']) {
+                      <span class="auth-common-error">Require fill code</span>
+                    }
+                  </div>
+                }
+              </div>
+            }
             <div class="auth-common-wrapper">
               <div class="auth-common-item">
                 <input
@@ -112,8 +142,16 @@
               }
             </div>
           </form>
-          <button [disabled]="loginForm.invalid" class="button button-yellow auth-form-button">
+          <div id="recaptcha-container"></div>
+          <button
+            (click)="login()"
+            [disabled]="loginForm.invalid"
+            class="button button-yellow auth-form-button">
             Log In
+          </button>
+          <button (click)="sendOTP()" class="button button-yellow auth-form-button">SendOTP</button>
+          <button (click)="verifyOTP()" class="button button-yellow auth-form-button">
+            VerifyOTP
           </button>
         </div>
         <div class="line">
