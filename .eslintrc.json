@@ -56,7 +56,10 @@
     },
     {
       "files": ["*.ts"],
-      "extends": ["plugin:@ngrx/all"]
+      "extends": ["plugin:@ngrx/all"],
+      "rules": {
+        "@ngrx/on-function-explicit-return-type": "off"
+      }
     }
   ]
 }

@@ -1,4 +1,5 @@
 import { afterNextRender, Component, inject } from '@angular/core';
+import { FooterComponent, HeaderComponent } from 'app/components';
 import { AuthService, DestroyDirective } from 'app/core';
 import { TranslateService } from '@ngx-translate/core';
 import { RouterOutlet } from '@angular/router';
@@ -7,7 +8,7 @@ import { takeUntil } from 'rxjs';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, FooterComponent, HeaderComponent],
   hostDirectives: [DestroyDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

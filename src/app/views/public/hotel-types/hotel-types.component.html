@@ -1,0 +1,10 @@
+<section class="hotel-types padding-common">
+  <div class="container">
+    <h2 class="title-common">Hotel Types</h2>
+    <div class="hotel-items">
+      @for (hotelItem of hotelTypes | async; track hotelItem) {
+        <div class="hotel-item">{{ hotelItem.name }}</div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+@import '../../../../assets/styles/color';
+@import '../../../../assets/styles/font-size';
+
+.hotel-types {
+  .container {
+    .hotel-items {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+
+      .hotel-item {
+        padding: 10px 5px;
+        font-size: var(--p-font-size);
+        border: 1px solid var(--primary-blue-color);
+      }
+    }
+  }
+}

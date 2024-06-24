@@ -1,0 +1,74 @@
+@import '../../../assets/styles/color';
+@import '../../../assets/styles/font-size';
+
+.footer {
+  background-color: var(--primary-gray-color);
+  padding: 30px 0;
+
+  .container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 30px 40px;
+    flex-wrap: wrap;
+
+    .footer-lists {
+      display: flex;
+      column-gap: 62px;
+
+      .footer-list {
+        .footer-list-title {
+          font-family: Raleway, sans-serif;
+          font-weight: 500;
+          font-size: var(--p-font-size);
+          text-transform: uppercase;
+          color: #fff;
+          margin-bottom: 15px;
+        }
+
+        .menu {
+          .menu-items {
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+
+            .menu-item {
+              .menu-item-a {
+                color: var(--text-white-color);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .footer-center {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      .logo {
+        margin-bottom: 55px;
+      }
+
+      .social-sites {
+        display: flex;
+        align-items: center;
+        column-gap: 16px;
+        margin-bottom: 14px;
+
+        .social-site {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .footer-payments {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      column-gap: 10px;
+    }
+  }
+}

@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   imagesPath: 'assets/images/',
   imagesIconsPath: 'assets/images/icons/',
+  imagesSocialSitesPath: 'assets/images/social-sites/',
   firebaseConfig: {
     apiKey: 'AIzaSyBznvaXM0wEzWEdnOxRJyupCt6MsFq_dHQ',
     authDomain: 'booking-ssr.firebaseapp.com',

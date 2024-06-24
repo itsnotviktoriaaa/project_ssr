@@ -1,0 +1,51 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer-lists">
+      <div class="footer-list">
+        <h5 class="footer-list-title">Navigation</h5>
+        <nav class="menu">
+          <ul class="menu-items">
+            @for (item of footerMenuItems; track item) {
+              <li class="menu-item">
+                <a class="menu-item-a" [routerLink]="item.path">{{ item.title }}</a>
+              </li>
+            }
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-list">
+        <h5 class="footer-list-title">Sections</h5>
+        <nav class="menu">
+          <ul class="menu-items">
+            @for (item of footerSectionItems; track item) {
+              <li class="menu-item">
+                <a class="menu-item-a" [routerLink]="item.path">{{ item.title }}</a>
+              </li>
+            }
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-center">
+      <div class="logo">
+        <img [src]="imagesPath + 'logo-icon.webp'" [alt]="'header-comp.logo' | translate" />
+      </div>
+      <div class="social-sites">
+        @for (socialSiteItem of socialSiteItems; track socialSiteItem) {
+          <a class="social-site" [href]="socialSiteItem.href">
+            <svg-icon [src]="imagesSocialSitesPath + socialSiteItem.path"></svg-icon>
+          </a>
+        }
+      </div>
+
+      <p class="rights">© greenhause — 2022. Все права защищены</p>
+    </div>
+    <div class="footer-payments">
+      @for (footerPayment of footerPayments; track footerPayment) {
+        <div class="footer-payment">
+          <img [src]="imagesPath + footerPayment" alt="payment" />
+        </div>
+      }
+    </div>
+  </div>
+</footer>

@@ -185,6 +185,58 @@ a {
   border-top: 1px solid var(--text-white-color);
 }
 
+.logo {
+  max-width: 118px;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.search {
+  cursor: pointer;
+}
+
+.menu-item {
+  &:not(:last-child) {
+    margin-right: 15px;
+  }
+
+  .menu-item-a {
+    text-decoration: none;
+    font-family: Raleway, sans-serif;
+    font-weight: 400;
+    font-size: var(--p-font-size);
+    text-transform: uppercase;
+    color: var(--text-darker-color);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.rights {
+  font-family: Raleway, sans-serif;
+  font-weight: 400;
+  font-size: var(--p-font-size);
+  color: #d3dadc;
+}
+
+.padding-common {
+  padding: 30px 0;
+}
+
+.title-common {
+  text-align: center;
+  font-family: Alice-Regular, sans-serif;
+  font-weight: 400;
+  font-size: var(--h2-font-size);
+  text-transform: uppercase;
+  color: var(--text-darker-color);
+  margin-bottom: 30px;
+}
+
 @media (width <= 1200px) {
   html {
     font-size: 15px;

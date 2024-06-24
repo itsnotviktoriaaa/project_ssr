@@ -50,5 +50,9 @@
     "verify-otp": "Verify OTP",
     "dont-account": "Don't have an account yet?",
     "login-button": "Login"
+  },
+  "language": {
+    "en": "En",
+    "ru": "Rus"
   }
 }

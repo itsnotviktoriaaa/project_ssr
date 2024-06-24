@@ -3,5 +3,80 @@
     <div class="logo">
       <img [src]="imagesPath + 'logo-icon.webp'" [alt]="'header-comp.logo' | translate" />
     </div>
+    <div class="search-wrapper">
+      <div (click)="openInputForSearching()" class="search">
+        <svg-icon [src]="imagesIconsPath + 'search-icon.svg'"></svg-icon>
+      </div>
+      @if (showInputForSearching | async) {
+        <div class="search-find-wrapper">
+          <div class="search-find">
+            <input class="search-find-input" type="text" />
+            <svg-icon
+              class="search-find-loop"
+              [src]="imagesIconsPath + 'search-icon.svg'"></svg-icon>
+          </div>
+          @if (showResultsFromSearching()) {
+            <div class="search-results">
+              <div class="search-result">Hello, it's just for check</div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+    <div class="header-menu">
+      <nav class="menu">
+        <ul class="menu-items">
+          @for (item of headerMenuItems; track item) {
+            <li class="menu-item">
+              <a class="menu-item-a" [routerLink]="item.path">{{ item.title }}</a>
+            </li>
+          }
+        </ul>
+      </nav>
+    </div>
+    <div class="header-actions">
+      <svg-icon
+        class="header-action"
+        [src]="imagesIconsPath + 'heart-icon.svg'"
+        (click)="moveToPage('/personal/favourite')"></svg-icon>
+      <svg-icon
+        class="header-action"
+        [src]="imagesIconsPath + 'bucket-icon.svg'"
+        (click)="moveToPage('/personal/bucket')"></svg-icon>
+    </div>
+    <div class="header-etc">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button>
+          <mat-button-toggle-group name="language" aria-label="Language">
+            <mat-button-toggle (click)="selectLanguage('language.ru')" value="ru">
+              {{ 'language.ru' | translate }}
+            </mat-button-toggle>
+            <mat-button-toggle (click)="selectLanguage('language.en')" value="en">
+              {{ 'language.en' | translate }}
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </button>
+        <button>
+          <mat-button-toggle-group
+            [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()"
+            name="favoriteColor"
+            aria-label="Favorite Color">
+            <mat-button-toggle (click)="changeTheme('light')" value="light">
+              Light
+            </mat-button-toggle>
+            <mat-button-toggle (click)="changeTheme('dark')" value="dark">Dark</mat-button-toggle>
+          </mat-button-toggle-group>
+        </button>
+        <button (click)="logAction(actionForSign())" mat-menu-item>
+          <span>{{ actionForSign() }}</span>
+        </button>
+      </mat-menu>
+    </div>
   </div>
 </header>
